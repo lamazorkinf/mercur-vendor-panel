@@ -10,4 +10,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 RUN chmod -R 755 /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-CMD ["sh", "-c", "nginx -g 'daemon off;' & wait"]
+
+# Deshabilitar health check
+HEALTHCHECK NONE
+
+CMD ["nginx", "-g", "daemon off;"]
